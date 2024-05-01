@@ -14,7 +14,7 @@ defineProps({
 </script>
 
 <template>
-    <Head title="Social Media Website"/>
+    <Head title="JyotiPix"/>
 
     <AuthenticatedLayout>
 <!--        <pre>{{posts}}</pre>-->

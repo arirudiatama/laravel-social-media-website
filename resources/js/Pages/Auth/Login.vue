@@ -33,11 +33,11 @@ const submit = () => {
     <GuestLayout>
         <Head title="Log in"/>
         <div class="text-center dark:text-gray-100">
-            <h2 class="text-2xl text-center">Login</h2>
+            <h2 class="text-2xl text-center">Halaman Login</h2>
             <span class="text-gray-400 text-sm">or</span>
             <div class="flex justify-center">
                 <Link :href="route('register')" class="inline-block hover:underline">
-                    create new account
+                    Akun Baru
                 </Link>
             </div>
         </div>
