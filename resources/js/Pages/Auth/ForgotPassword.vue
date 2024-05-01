@@ -24,10 +24,9 @@ const submit = () => {
 <template>
     <GuestLayout>
         <Head title="Forgot Password" />
-
+        
         <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-            Forgot your password? No problem. Just let us know your email address and we will email you a password reset
-            link that will allow you to choose a new one.
+            Lupa kata sandi Anda? Tidak masalah. Cukup beri tahu kami alamat email Anda dan kami akan mengirimkan tautan reset kata sandi melalui email yang akan memungkinkan Anda untuk menganti kata sandi yang baru.
         </div>
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
@@ -50,8 +49,9 @@ const submit = () => {
 
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
-
+            
             <div class="flex items-center justify-end mt-4">
+               
                 <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Email Password Reset Link
                 </PrimaryButton>
