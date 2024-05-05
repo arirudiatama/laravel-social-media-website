@@ -14,7 +14,7 @@ defineProps({
 </script>
 
 <template>
-    <Head title="JyotiPix"/>
+    <Head title="Home"/>
 
     <AuthenticatedLayout>
 <!--        <pre>{{posts}}</pre>-->
@@ -26,7 +26,7 @@ defineProps({
                 <FollowingList :users="followings"/>
             </div>
             <div class="lg:col-span-6 lg:order-2 h-full overflow-hidden flex flex-col">
-                <CreatePost/>
+                <!-- <CreatePost/> -->
                 <PostList :posts="posts.data" class="flex-1"/>
             </div>
         </div>

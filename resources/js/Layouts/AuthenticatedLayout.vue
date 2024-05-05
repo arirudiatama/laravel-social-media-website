@@ -6,7 +6,10 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import {Link, router, usePage} from '@inertiajs/vue3';
 import TextInput from "@/Components/TextInput.vue";
-import {MoonIcon} from '@heroicons/vue/24/solid'
+
+import CreatePost from "@/Components/app/CreatePost.vue";
+import { MoonIcon } from '@heroicons/vue/24/solid'
+
 
 const showingNavigationDropdown = ref(false);
 const keywords = ref(usePage().props.search || '')
@@ -49,9 +52,11 @@ function toggleDarkMode(){
                     </div>
 
                     <div class="flex items-center gap-3 flex-1">
-                        <TextInput v-model="keywords" placeholder="Search on the website" class="w-full"
+                        <TextInput v-model="keywords" placeholder="Cari..." class="w-full"
                                    @keyup.enter="search"/>
-
+                                   <div>
+                                       <CreatePost/>
+                                   </div>
                         <button @click="toggleDarkMode" class="dark:text-white">
                             <MoonIcon class="w-5 h-5"/>
                         </button>
