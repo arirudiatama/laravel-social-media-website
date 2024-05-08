@@ -85,12 +85,11 @@ class PostController extends Controller
 
             if ($group) {
                 $users = $group->approvedUsers()->where('users.id', '!=', $user->id)->get();
-                Notification::send($users, new PostCreated($post, $user, $group));
+                // Notification::send($users, new PostCreated($post, $user, $group));
             }
 
             $followers = $user->followers;
-            Notification::send($followers, new PostCreated($post, $user, null));
-
+            // Notification::send($followers, new PostCreated($post, $user, null));
         } catch (\Exception $e) {
             foreach ($allFilePaths as $path) {
                 Storage::disk('public')->delete($path);
@@ -164,7 +163,7 @@ class PostController extends Controller
             $post->delete();
 
             if (!$post->isOwner($id)) {
-                $post->user->notify(new PostDeleted($post->group));
+                // $post->user->notify(new PostDeleted($post->group));
             }
 
             return back();
@@ -206,7 +205,7 @@ class PostController extends Controller
 
             if (!$post->isOwner($userId)) {
                 $user = User::where('id', $userId)->first();
-                $post->user->notify(new ReactionAddedOnPost($post, $user));
+                // $post->user->notify(new ReactionAddedOnPost($post, $user));
             }
         }
 
@@ -233,7 +232,7 @@ class PostController extends Controller
         ]);
 
         $post = $comment->post;
-        $post->user->notify(new CommentCreated($comment, $post));
+        // $post->user->notify(new CommentCreated($comment, $post));
 
         return response(new CommentResource($comment), 201);
     }
@@ -250,7 +249,7 @@ class PostController extends Controller
             $comment->delete();
 
             if (!$comment->isOwner($id)) {
-                $comment->user->notify(new CommentDeleted($comment, $post));
+                // $comment->user->notify(new CommentDeleted($comment, $post));
             }
 
 
@@ -258,8 +257,6 @@ class PostController extends Controller
         }
 
         return response("You don't have permission to delete this comment.", 403);
-
-
     }
 
     public function updateComment(UpdateCommentRequest $request, Comment $comment)
@@ -299,7 +296,7 @@ class PostController extends Controller
 
             if (!$comment->isOwner($userId)) {
                 $user = User::where('id', $userId)->first();
-                $comment->user->notify(new ReactionAddedOnComment($comment->post, $comment, $user));
+                // $comment->user->notify(new ReactionAddedOnComment($comment->post, $comment, $user));
             }
         }
 
@@ -316,11 +313,11 @@ class PostController extends Controller
         $prompt = $request->get('prompt');
 
         $result = OpenAI::chat()->create([
-            'model' => 'gpt-4',
+            'model' => 'gpt-3.5-turbo',
             'messages' => [
                 [
                     'role' => 'user',
-                    'content' => "Please generate social media post content based on the following prompt. Generated formatted content with multiple paragraphs. Put hashtags after 2 lines from the main content" . PHP_EOL . PHP_EOL . "Prompt: " . PHP_EOL
+                    'content' => "Silakan hasilkan konten postingan media sosial berdasarkan prompt berikut. Konten yang dihasilkan memiliki format dengan beberapa paragraf. Letakkan tanda pagar setelah 2 baris dari konten utama." . PHP_EOL . PHP_EOL . "Prompt: " . PHP_EOL
                         . $prompt
                 ],
             ],
@@ -328,7 +325,7 @@ class PostController extends Controller
 
         return response([
             'content' => $result->choices[0]->message->content
-//            'content' => "\"🎉 Exciting news! We're thrilled to announce that we just released a brand new feature on our app/website! 💥 Get ready to experience the next level of convenience and efficiency with this game-changing addition. 🚀 Try it out now and let us know what you think! 😍 #NewFeatureAlert #UpgradeYourExperience\""
+            //            'content' => "\"🎉 Exciting news! We're thrilled to announce that we just released a brand new feature on our app/website! 💥 Get ready to experience the next level of convenience and efficiency with this game-changing addition. 🚀 Try it out now and let us know what you think! 😍 #NewFeatureAlert #UpgradeYourExperience\""
         ]);
     }
 
@@ -399,8 +396,8 @@ class PostController extends Controller
             $user->save();
         }
 
-        return back()->with('success', 'Post was successfully ' . ( $pinned ? 'pinned' : 'unpinned' ));
+        return back()->with('success', 'Post was successfully ' . ($pinned ? 'pinned' : 'unpinned'));
 
-//        return response("You don't have permission to perform this action", 403);
+        //        return response("You don't have permission to perform this action", 403);
     }
 }

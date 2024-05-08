@@ -256,7 +256,7 @@ function matchLink() {
 </script>
 
 <template>
-    <BaseModal :title="post.id ? 'Update Post' : 'Create Post'"
+    <BaseModal :title="post.id ? 'Edit Post' : 'Postingan Baru'"
                v-model="show"
                @hide="closeModal">
         <div class="p-4">

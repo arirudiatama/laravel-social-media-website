@@ -58,7 +58,7 @@ function submit() {
 </script>
 
 <template>
-    <BaseModal title="Create new Group" v-model="show" @hide="closeModal()" >
+    <BaseModal title="Buat Grup Baru" v-model="show" @hide="closeModal()" >
         <div class="p-4 dark:text-gray-100">
             <GroupForm :form="form"/>
         </div>
@@ -69,7 +69,7 @@ function submit() {
                 class="text-gray-800 flex gap-1 items-center justify-center bg-gray-100 rounded-md hover:bg-gray-200 py-2 px-4"
             >
                 <XMarkIcon class="w-5 h-5"/>
-                Cancel
+                Kembali
             </button>
             <button
                 type="button"

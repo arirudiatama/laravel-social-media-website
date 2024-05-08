@@ -5,7 +5,6 @@ import FollowingList from "@/Components/app/FollowingList.vue";
 import CreatePost from "@/Components/app/CreatePost.vue";
 import PostList from "@/Components/app/PostList.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-
 defineProps({
     posts: Object,
     groups: Array,
@@ -22,6 +21,8 @@ defineProps({
             <div class="lg:col-span-3 lg:order-1 h-full overflow-hidden">
                 <GroupList :groups="groups"/>
             </div>
+           
+           
             <div class="lg:col-span-3 lg:order-3 h-full overflow-hidden">
                 <FollowingList :users="followings"/>
             </div>

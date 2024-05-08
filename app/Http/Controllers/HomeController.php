@@ -8,6 +8,7 @@ use App\Http\Resources\PostResource;
 use App\Http\Resources\UserResource;
 use App\Models\Group;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -30,15 +31,14 @@ class HomeController extends Controller
                     ->where('gu.user_id', '=', $userId)
                     ->where('gu.status', GroupUserStatus::APPROVED->value);
             })
-            ->where(function($query) use ($userId) {
+            ->where(function ($query) use ($userId) {
                 /** @var \Illuminate\Database\Query\Builder $query */
                 $query->whereNotNull('f.follower_id')
                     ->orWhereNotNull('gu.group_id')
-                    ->orWhere('posts.user_id', $userId)
-                    ;
+                    ->orWhere('posts.user_id', $userId);
             })
-//            ->whereNot('posts.user_id', $userId)
-            ->paginate(10);
+            //            ->whereNot('posts.user_id', $userId)
+            ->paginate(2);
 
         $posts = PostResource::collection($posts);
         if ($request->wantsJson()) {
@@ -53,12 +53,17 @@ class HomeController extends Controller
             ->orderBy('gu.role')
             ->orderBy('name', 'desc')
             ->get();
+        $allUsers = User::latest()
+            ->whereNotNull('email_verified_at')
+            // ->take(10)
+            ->get();
+
 
 
         return Inertia::render('Home', [
             'posts' => $posts,
             'groups' => GroupResource::collection($groups),
-            'followings' => UserResource::collection($user->followings)
+            'followings' => UserResource::collection($allUsers)
         ]);
     }
 }

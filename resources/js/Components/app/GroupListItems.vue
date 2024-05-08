@@ -4,6 +4,7 @@ import GroupItem from "@/Components/app/GroupItem.vue";
 import {ref} from "vue";
 import GroupModal from "@/Components/app/GroupModal.vue";
 
+import { PlusIcon } from '@heroicons/vue/24/solid'
 const searchKeyword = ref('')
 const showNewGroupModal = ref(false)
 
@@ -19,10 +20,11 @@ function onGroupCreate(group) {
 
 <template>
     <div class="flex gap-2  mt-4">
-        <TextInput :model-value="searchKeyword" placeholder="Type to search" class="w-full"/>
+        <!-- <TextInput :model-value="searchKeyword" placeholder="Type to search" class="w-full"/> -->
         <button @click="showNewGroupModal = true"
-                class="text-sm bg-indigo-500 hover:bg-indigo-600 text-white rounded py-1 px-2 w-[120px]">
-            new group
+                class="text-sm bg-indigo-500 hover:bg-indigo-600 text-white rounded py-1 px-2 ">
+                Buat Grup 
+                <!-- <PlusIcon class="w-5 h-5"/> -->
         </button>
     </div>
     <div class="mt-3 h-[200px] lg:flex-1 overflow-auto">

@@ -5,7 +5,10 @@ import IndigoButton from "@/Components/app/IndigoButton.vue";
 import InputTextarea from "@/Components/InputTextarea.vue";
 import EditDeleteDropdown from "@/Components/app/EditDeleteDropdown.vue";
 import {usePage, Link} from "@inertiajs/vue3";
-import {ref} from "vue";
+import { ref } from "vue";
+import dayjs from 'dayjs';
+import 'dayjs/locale/id'; // Import the Indonesian locale
+
 import axiosClient from "@/axiosClient.js";
 import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
 
@@ -102,6 +105,12 @@ function onCommentDelete(comment) {
     }
     emit('commentDelete', comment)
 }
+
+// Fungsi untuk memformat waktu
+const formatTime = (time) => {
+  // Menggunakan Day.js untuk memformat waktu sesuai dengan format yang diinginkan
+  return dayjs(time).format('HH:mm dddd, D MMMM YYYY');
+};
 </script>
 
 <template>
@@ -111,7 +120,7 @@ function onCommentDelete(comment) {
                  class="w-[40px] rounded-full border border-2 transition-all hover:border-blue-500"/>
         </Link>
         <div class="flex flex-1">
-            <InputTextarea v-model="newCommentText" placeholder="Enter your comment here" rows="1"
+            <InputTextarea v-model="newCommentText" placeholder="Beri Komentar..." rows="1"
                            class="w-full max-h-[160px] resize-none rounded-r-none"></InputTextarea>
             <IndigoButton @click="createComment" class="rounded-l-none w-[100px] ">Submit</IndigoButton>
         </div>
@@ -130,8 +139,8 @@ function onCommentDelete(comment) {
                                 {{ comment.user.name }}
                             </a>
                         </h4>
-                        <small class="text-xs text-gray-400">{{ comment.updated_at }}</small>
-                    </div>
+                        <small class="text-xs text-gray-400">{{ formatTime(comment.updated_at) }}</small>
+        </div>
                 </div>
                 <EditDeleteDropdown :user="comment.user"
                                     :post="post"
@@ -183,7 +192,7 @@ function onCommentDelete(comment) {
             </div>
         </div>
         <div v-if="!data.comments.length" class="py-4 text-center dark:text-gray-100">
-            There are no comments.
+           <small>Tidak Ada Komentar</small>
         </div>
     </div>
 </template>

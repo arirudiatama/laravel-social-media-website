@@ -1,4 +1,5 @@
 <script setup>
+import {Head, Link} from '@inertiajs/vue3';
 import {computed, ref} from 'vue'
 import {XMarkIcon, CheckCircleIcon, CameraIcon} from '@heroicons/vue/24/solid'
 import {TabGroup, TabList, Tab, TabPanels, TabPanel} from '@headlessui/vue'
@@ -171,6 +172,7 @@ function updateGroup() {
 </script>
 
 <template>
+     <Head :title="group.name"/>
     <AuthenticatedLayout>
         <div class="max-w-[768px] mx-auto h-full overflow-auto">
             <div class="px-4">
@@ -271,7 +273,9 @@ function updateGroup() {
                     </div>
                 </div>
             </div>
+            
             <div class="border-t m-4 mt-0">
+                
                 <TabGroup>
                     <TabList class="flex bg-white dark:bg-slate-950 dark:text-white">
                         <Tab v-slot="{ selected }" as="template">
@@ -289,19 +293,22 @@ function updateGroup() {
                         <Tab v-slot="{ selected }" as="template">
                             <TabItem text="About" :selected="selected"/>
                         </Tab>
+                       
+                            <CreatePost :group="group"/>
+
                     </TabList>
 
                     <TabPanels class="mt-2">
                         <TabPanel>
                             <template v-if="posts">
-                                <CreatePost :group="group"/>
+                             
                                 <PostList v-if="posts.data.length" :posts="posts.data" class="flex-1"/>
                                 <div v-else class="py-8 text-center dark:text-gray-100">
-                                    There are no posts in this group. Be the first and create it.
+                                    Belum ada postingan dalam grup ini 
                                 </div>
                             </template>
                             <div v-else class="py-8 text-center dark:text-gray-100">
-                                You don't have permission to view these posts.
+                               Kamu tidak memiliki akses untuk melihat postingan ini 
                             </div>
                         </TabPanel>
                         <TabPanel v-if="isJoinedToGroup">
@@ -330,7 +337,7 @@ function updateGroup() {
                                               @reject="rejectUser"/>
                             </div>
                             <div class="py-8 text-center dark:text-gray-100">
-                                There are no pending requests.
+                                Tidak ada permintaan anggota grup
                             </div>
                         </TabPanel>
                         <TabPanel>

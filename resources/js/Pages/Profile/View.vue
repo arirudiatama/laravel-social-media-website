@@ -1,4 +1,5 @@
 <script setup>
+import {Head, Link} from '@inertiajs/vue3';
 import {computed, ref} from 'vue'
 import {XMarkIcon, CheckCircleIcon, CameraIcon} from '@heroicons/vue/24/solid'
 import {TabGroup, TabList, Tab, TabPanels, TabPanel} from '@headlessui/vue'
@@ -123,6 +124,7 @@ function followUser() {
 </script>
 
 <template>
+     <Head :title="user.name"/>
     <AuthenticatedLayout>
         <div class="max-w-[768px] mx-auto h-full overflow-auto">
             <div class="px-4">
@@ -203,15 +205,15 @@ function followUser() {
                         <div class="flex justify-between items-center flex-1 p-4">
                             <div>
                                 <h2 class="font-bold text-lg">{{ user.name }}</h2>
-                                <p class="text-xs text-gray-500">{{ followerCount }} follower(s)</p>
+                                <p class="text-xs text-gray-500">{{ followerCount }} Pengikut</p>
                             </div>
 
                             <div v-if="!isMyProfile">
                                 <PrimaryButton v-if="!isCurrentUserFollower" @click="followUser">
-                                    Follow User
+                                    Ikuti
                                 </PrimaryButton>
                                 <DangerButton v-else @click="followUser">
-                                    Unfollow User
+                                   Berhenti Mengikuti
                                 </DangerButton>
                             </div>
                         </div>
@@ -222,26 +224,26 @@ function followUser() {
                 <TabGroup>
                     <TabList class="flex bg-white dark:bg-slate-950 dark:text-white">
                         <Tab v-slot="{ selected }" as="template">
-                            <TabItem text="Posts" :selected="selected"/>
+                            <TabItem text="Postingan" :selected="selected"/>
                         </Tab>
                         <Tab v-slot="{ selected }" as="template">
-                            <TabItem text="Followers" :selected="selected"/>
+                            <TabItem text="Pengikut" :selected="selected"/>
                         </Tab>
                         <Tab v-slot="{ selected }" as="template">
-                            <TabItem text="Followings" :selected="selected"/>
+                            <TabItem text="Mengikuti" :selected="selected"/>
                         </Tab>
                         <Tab v-slot="{ selected }" as="template">
-                            <TabItem text="Photos" :selected="selected"/>
+                            <TabItem text="Foto" :selected="selected"/>
                         </Tab>
                         <Tab v-if="isMyProfile" v-slot="{ selected }" as="template">
-                            <TabItem text="My Profile" :selected="selected"/>
+                            <TabItem text="Profile" :selected="selected"/>
                         </Tab>
                     </TabList>
 
                     <TabPanels class="mt-2">
                         <TabPanel>
                             <template v-if="posts">
-                                <CreatePost />
+                                <!-- <CreatePost /> -->
                                 <PostList :posts="posts.data" class="flex-1"/>
                             </template>
                             <div v-else class="py-8 text-center dark:text-gray-100">

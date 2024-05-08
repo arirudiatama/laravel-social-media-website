@@ -9,6 +9,7 @@ import TextInput from "@/Components/TextInput.vue";
 
 import CreatePost from "@/Components/app/CreatePost.vue";
 import { MoonIcon } from '@heroicons/vue/24/solid'
+import { EnvelopeIcon } from '@heroicons/vue/24/outline'
 
 
 const showingNavigationDropdown = ref(false);
@@ -42,11 +43,11 @@ function toggleDarkMode(){
                     <div class="flex mr-2">
                         <!-- Logo -->
                         <div class="shrink-0 flex items-center">
-                            <Link :href="route('dashboard')">
+                           <a href="/">
                                 <ApplicationLogo
                                     class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"
                                 />
-                            </Link>
+                           </a>
                         </div>
 
                     </div>
@@ -57,6 +58,9 @@ function toggleDarkMode(){
                                    <div>
                                        <CreatePost/>
                                    </div>
+                                   <a href="/chatify">
+                                   <EnvelopeIcon class="w-8 h-5 dark:text-white" />
+                                </a>
                         <button @click="toggleDarkMode" class="dark:text-white">
                             <MoonIcon class="w-5 h-5"/>
                         </button>

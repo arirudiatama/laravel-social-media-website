@@ -139,7 +139,7 @@ function sendReaction() {
                 >
                     <ChatBubbleLeftRightIcon class="w-5 h-5"/>
                     <span class="mr-2">{{ post.num_of_comments }}</span>
-                    Comment
+                    Komentar
                 </DisclosureButton>
             </div>
 

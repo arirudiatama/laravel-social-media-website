@@ -16,20 +16,20 @@ class UserController extends Controller
             'follow' => ['boolean']
         ]);
         if ($data['follow']) {
-            $message = 'You followed user "'.$user->name.'"';
+            $message = 'You followed user "' . $user->name . '"';
             Follower::create([
                 'user_id' => $user->id,
                 'follower_id' => Auth::id()
             ]);
         } else {
-            $message = 'You unfollowed user "'.$user->name.'"';
+            $message = 'You unfollowed user "' . $user->name . '"';
             Follower::query()
                 ->where('user_id', $user->id)
                 ->where('follower_id', Auth::id())
                 ->delete();
         }
 
-        $user->notify(new FollowUser(Auth::getUser(), $data['follow']));
+        // $user->notify(new FollowUser(Auth::getUser(), $data['follow']));
 
         return back()->with('success', $message);
     }

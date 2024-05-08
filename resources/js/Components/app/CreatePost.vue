@@ -31,7 +31,7 @@ function showCreatePostModal() {
     
         <button @click="showCreatePostModal" class="">
         
-            <ArrowUpTrayIcon class="w-10 h-6 dark:text-white"/>
+            <ArrowUpTrayIcon class="w-5 h-5 dark:text-white"/>
         </button>
 
         <PostModal :post="newPost" :group="group" v-model="showModal"/>
